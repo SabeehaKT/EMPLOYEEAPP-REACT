@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import NavBar from './NavBar'
+import axios from 'axios'
 
 const AddEmployee = () => {
     const [data,setData]=useState(
@@ -14,6 +15,16 @@ const AddEmployee = () => {
     }
     const readValue=()=>{
         console.log(data)
+        axios.post("http://localhost:8082/add",data).then(
+            (response)=>{
+                console.log(response.data)
+                if (response.data.status=="success") {
+                    alert("Successfully added")
+                } else {
+                    alert("Error!")
+                }
+            }
+        ).catch().finally()
     }
     return (
         <div>
